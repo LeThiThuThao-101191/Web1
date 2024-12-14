@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .editable {
+            border: none;
+            background: transparent;
+            color: var(--bs-primary);
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .editable:focus {
+            outline: none;
+            border-bottom: 2px solid var(--bs-primary);
+        }
+
+        /* New styles to overlay the category and discount over the image */
+        .overlay-input {
+            position: absolute;
+            z-index: 2;
+            top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            color: white;
+            cursor: text;
+            width: 80px;
+            height: 28px;
+            text-align: center;
+        }
+
+        .category-overlay {
+            background-color: rgba(232, 88, 88, 0.92);
+            left: 10px;
+        }
+
+        .discount-overlay {
+            background-color: #19a63a;
+            top:45px;
+            left : 10px;
+        }
+
+        /* Styling for image container to position the overlay input fields */
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+        .row {
+            /* Các thuộc tính CSS để căn giữa div */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75vh;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-5">
+
+        <div class="card-body">
+            <form th:action="@{/admin/product/update/{id}(id=${product.id})}" th:object="${product}" method="post" id="edit-form">
+                <!-- Product display -->
+                <div class="container my-5" >
+                    <h1 class="text-center" style="color: #0f5132;">Edit Product</h1>
+                    <div class="row" style="margin-top: 20px; "  >
+                        <div class="col-md-4 " align="center">
+                            <div class="card mb-4 shadow-sm">
+                                <!-- Category and Discount overlays on the image -->
+                                <div class="image-container">
+                                    <!-- Category -->
+                                    <input type="text"
+                                           th:field="*{phanloai}"
+                                           placeholder="Category"
+                                           th:value="*{phanloai}"
+                                           class="overlay-input category-overlay">
+
+                                    <!-- Discount -->
+                                    <input type="text"
+                                           th:field="*{precent}"
+                                           placeholder="Giam gia"
+                                           th:value="*{precent}"
+                                           class="overlay-input discount-overlay">
+
+                                    <!-- Product Image -->
+                                    <img id="productImage" class="card-img-top mx-auto d-block" th:src="@{'/images/' + ${product.imageFilename}}"
+                                            alt="Product Image">
+                                    <div class="d-flex justify-content-center align-items-center mt-3 ">
+                                        <div class="text-center">
+                                            <label for="imageFilename" class="btn btn-success btn-sm me-2">Change Image/ Nhap URL</label>
+                                            <input type="text" id="imageFilename" th:field="*{imageFilename}" class="form-control" placeholder="Nhập URL hình ảnh" required style="margin-top: 20px;">
+                                        </div>
+                                    </div>
+
+                            </div>
+
+                                <div class="card-body">
+                                    <!-- Product Name -->
+                                    <input
+                                            type="text"
+                                            class="editable"
+                                            th:field="*{name}"
+                                            placeholder="Product Name"
+                                            th:value="*{name}">
+
+                                    <!-- Description -->
+                                    <div
+                                            class="card-text text-muted text-center"
+                                            style="font-size: 14px; cursor: text;"
+                                            contenteditable="true"
+                                            onfocus="this.style.outline = 'none';"
+                                            onblur="document.getElementById('description').value = this.textContent.trim();"
+                                            th:text="*{description}">
+                                        Description
+                                    </div>
+                                    <input type="hidden" id="description" name="description" th:field="*{description}">
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <!-- Price -->
+                                            <strong>
+                                                <input type="text"
+                                                       style="margin-right: 30px; font-size: 14px; font-weight: bold; border: none; background-color: transparent; color: black; width: 80px; text-align: center;outline: none"
+                                                       th:field="*{price}"
+                                                       value="100"
+                                                       placeholder="$100">
+                                            </strong>
+
+                                            <!-- Old Price -->
+                                            <input type="text"
+                                                   style="text-decoration: line-through; font-size: 14px; border: none; background-color: transparent; color: gray; width: 50px; text-align: center;outline: none"
+                                                   th:field="*{price2}"
+                                                   value="150"
+                                                   placeholder="$150">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                </div>-->
+
+                <!-- Action buttons -->
+                <div class="d-flex justify-content-center mt-4" style="margin-top: 40px">
+                    <button type="submit" class="btn btn-success me-2">Save</button>
+                    <a th:href="@{/admin/products}" class="btn btn-secondary">Cancel</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

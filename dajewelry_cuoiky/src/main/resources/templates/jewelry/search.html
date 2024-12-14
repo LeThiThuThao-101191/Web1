@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<!-- Navbar start -->
+<div class="container-fluid fixed-top">
+  <div class="container px-0">
+    <nav class="navbar navbar-light bg-white navbar-expand-xl">
+      <a th:href="@{/home}" class="navbar-brand">
+        <h1 class="display-6 text-primary font-weight-bold" id="logo-text">Jewelry</h1>
+      </a>
+      <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars text-primary"></span>
+      </button>
+      <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+        <div class="navbar-nav mx-auto">
+          <a th:href="@{/home}" class="nav-item nav-link active">Home</a>
+          <a href="" class="nav-item nav-link">Shop</a>
+          <a th:href="@{/home/products}" class="nav-item nav-link">Product</a>
+
+          <a href="#" class="nav-item nav-link" >Pages</a>
+
+
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+        <div class="d-flex m-3 me-0">
+          <a href="#" class="position-relative me-4 my-auto">
+            <i class="bi bi-cart-plus" style="font-size: 30px"></i>
+          </a>
+          <a href="#" class="my-auto">
+            <i class="bi bi-person-fill" style="font-size: 30px"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- Navbar End -->
+
+
+
+
+<!--Product -->
+<div class="container my-5">
+  <h1 class="text-center text-success">Search Results</h1>
+  <p class="text-center text-muted" th:if="${searchKeyword != null}">Showing results for: <strong th:text="${searchKeyword}"></strong></p>
+  <div class="row mt-4">
+    <!-- Product Cards -->
+    <div class="col-md-3" th:each="product : ${page_products}">
+      <div class="card mb-4 shadow-sm">
+        <div class="badge bg-danger text-white position-absolute" style="top: 15px; left: 10px;" th:text="${product.phanloai}"></div>
+        <div class="badge bg-success text-white position-absolute" style="top: 45px; left: 10px;" th:text="${product.precent +'%'}"></div>        <img class="card-img-top" style="height: 300px; object-fit: cover;" th:src="@{'/images/' + ${product.imageFilename}}" alt="Product Image">
+        <div class="card-body">
+          <h5 class="card-title text-center" th:text="${product.name}" style="color: var(--bs-primary);" >Product Name</h5>
+          <p class="text-center" th:text="${product.description}">Product Description</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong><span th:text="${'$' + product.price}" style="margin-right: 1px;"></span></strong>
+              <span th:text="${'$' + product.price2}" style="text-decoration: line-through;"></span>
+            </div>
+            <button class="btn btn-sm" style="border: 2px solid #efd12f; color: green; background-color: transparent; padding: 5px 10px; font-size: 12px; border-radius: 5px;" onmouseover="this.style.backgroundColor='green'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='green';">
+              <i class="bi bi-cart3"></i> Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- If no products found -->
+    <div class="col-12 text-center" th:if="${#lists.isEmpty(page_products)}">
+      <p class="text-muted">No products found. </p>
+    </div>
+  </div>
+  <!-- Back to Products Button -->
+  <div class="text-center mt-4">
+    <a th:href="@{/home/products}" class="btn btn-secondary">Back to All Products</a>
+  </div>
+</div>
+
+<!-- End product -->
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+  <div class="container py-5">
+    <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+      <div class="row g-4">
+        <div class="col-lg-3">
+          <a href="#">
+            <h1 class="text-primary mb-0">Jewelry</h1>
+            <p class="text-secondary mb-0">Luxurious Jewelry</p>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="position-relative mx-auto">
+            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
+            <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Follow Page</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-item">
+          <h4 class="text-light mb-3">Why People Like us!</h4>
+          <p class="mb-4">Jewelry is accessories made of gold, silver, gemstones, or pearls, including rings, necklaces,
+            earrings, bracelets, and anklets. They are used for beauty and expressing style.</p>
+          <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex flex-column text-start footer-item">
+          <h4 class="text-light mb-3">Shop Info</h4>
+          <a class="btn-link" href="">About Us</a>
+          <a class="btn-link" href="">Contact Us</a>
+          <a class="btn-link" href="">Privacy Policy</a>
+          <a class="btn-link" href="">Terms & Condition</a>
+          <a class="btn-link" href="">Return Policy</a>
+          <a class="btn-link" href="">FAQs & Help</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="d-flex flex-column text-start footer-item">
+          <h4 class="text-light mb-3">Account</h4>
+          <a class="btn-link" href="">My Account</a>
+          <a class="btn-link" href="">Shop details</a>
+          <a class="btn-link" href="">Shopping Cart</a>
+          <a class="btn-link" href="">Wishlist</a>
+          <a class="btn-link" href="">Order History</a>
+          <a class="btn-link" href="">International Orders</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-item">
+          <h4 class="text-light mb-3">Contact</h4>
+          <p>Address: Phan Dang Luu, Hai Chau, Da Nang</p>
+          <p>Email: jewelry@gmail.com</p>
+          <p>Phone: +84 0763723111</p>
+          <p>Payment Accepted</p>
+          <img src="img/payment.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer End -->
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright bg-dark py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+      </div>
+      <div class="col-md-6 my-auto text-center text-md-end text-white">
+        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Copyright End -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

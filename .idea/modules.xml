@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/demo6.iml" filepath="$PROJECT_DIR$/.idea/demo6.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/dajewelry_cuoiky.iml" filepath="$PROJECT_DIR$/.idea/dajewelry_cuoiky.iml" />
+>>>>>>> 1b75129 (Du an ck)
     </modules>
   </component>
 </project>

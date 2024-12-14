@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Product</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<!-- Navbar start -->
+<div class="container-fluid fixed-top">
+  <div class="container px-0">
+    <nav class="navbar navbar-light bg-white navbar-expand-xl">
+      <a href="" class="navbar-brand">
+        <h1 class="display-6 text-primary font-weight-bold" id="logo-text">Jewelry</h1>
+      </a>
+      <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars text-primary"></span>
+      </button>
+      <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+        <div class="navbar-nav mx-auto">
+          <a th:href="@{/home}" class="nav-item nav-link active">Home</a>
+          <a href="" class="nav-item nav-link">Shop</a>
+          <a th:href="@{/home/products}" class="nav-item nav-link">Product</a>
+
+          <a href="#" class="nav-item nav-link" >Pages</a>
+
+
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+        <div class="d-flex m-3 me-0">
+          <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <i class="bi bi-search text-primary" style="font-size: 20px"></i></button>
+          <a href="#" class="position-relative me-4 my-auto">
+            <i class="bi bi-cart-plus" style="font-size: 30px"></i>
+            <!--                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">4</span>-->
+          </a>
+          <a href="#" class="my-auto">
+            <i class="bi bi-person-fill" style="font-size: 30px"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- Navbar End -->
+
+<!-- Single Page Header Start -->
+<div class="container-fluid page-header py-5"
+     th:style="|background-image: url('@{/images/nen.jpg}'); height:300px; background-position: center;|">
+  <div class="container" style="margin-top: 70px">
+    <h1 class="text-center text-black-50 display-6">Product Detail</h1>
+  </div>
+</div>
+<!-- Single Page Header End -->
+
+<!-- Detail Product -->
+<div class="container my-5" th:each="detail : ${detail_products}">
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col-md-5">
+      <img th:src="@{'/images/' + ${detail.imageFilename}}" alt="Product Image" class="img-fluid rounded shadow">
+    </div>
+
+    <!-- Product Information -->
+    <div class="col-md-7">
+      <h2 th:text="${detail.name}">Broccoli</h2>
+      <p class="text-muted" th:text="'Category: ' + ${detail.category}">Category: Vegetables</p>
+      <h3 class="text-success" th:text="${detail.price + ' $'}">3.35 $</h3>
+
+      <!-- Product Rating -->
+      <h4>
+        <span class="text-warning">&#9733;</span>
+        <span class="text-warning">&#9733;</span>
+        <span class="text-warning">&#9733;</span>
+        <span class="text-warning">&#9733;</span>
+        <span class="text-muted">&#9734;</span>
+      </h4>
+
+      <!-- Product Description -->
+      <p th:text="${detail.title1}">
+        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
+      </p>
+      <p th:text="${detail.title2}" style="margin-top: 20px">
+        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
+      </p>
+
+      <!-- Add to Cart Section -->
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary me-2" type="button">-</button>
+        <span class="mx-2">1</span>
+        <button class="btn btn-outline-secondary me-4" type="button" >+</button>
+      </div>
+      <div style="margin-top: 30px">
+      <button class="btn btn-sm" style="border: 2px solid #efd12f; color: green; background-color: transparent; padding: 5px 10px; font-size: 12px; border-radius: 5px;" onmouseover="this.style.backgroundColor='green'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='green';">
+        <i class="bi bi-cart3"></i> Add to cart
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Description Tab -->
+  <div class="col-lg-12" style=" margin-top: 50px">
+    <nav>
+      <div class="nav nav-tabs mb-3">
+        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                aria-controls="nav-about" aria-selected="true">Description</button>
+        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                aria-controls="nav-mission" aria-selected="false">Reviews</button>
+      </div>
+    </nav>
+
+    <!-- Description Content -->
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+        <div th:if="${detail.description != null}" th:text="${detail.description}"></div>
+        <div th:if="${detail.description == null}">
+          <p>No description available</p>
+        </div>
+        <div style="margin-top: 25px" th:if="${detail.description2 != null}" th:text="${detail.description2}"></div>
+        <div th:if="${detail.description2 == null}">
+          <p>No description available</p>
+        </div>
+      </div>
+    </div>
+    <!-- End description -->
+
+    <!-- Reviews Tab -->
+    <div class="tab-content">
+      <div class="tab-pane fade" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+        <!-- Lặp qua tất cả các đánh giá -->
+        <div th:each="rv : ${reviews}" class="d-flex mb-4">
+          <img th:src="@{'/images/' + ${rv.imageFilename}}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+          <div class="">
+            <p class="mb-2" style="font-size: 14px;" th:text="${rv.date}"></p>
+            <div class="d-flex justify-content-between">
+              <h5 th:text="${rv.name}"></h5>
+              <div class="d-flex mb-3">
+                <i class="fa fa-star text-secondary"></i>
+                <i class="fa fa-star text-secondary"></i>
+                <i class="fa fa-star text-secondary"></i>
+                <i class="fa fa-star text-secondary"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <p th:text="${rv.description}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Reviews Tab -->
+  </div>
+
+  <!-- Product -->
+  <div class="container my-5" style="margin-top: 30px">
+    <h3 class="text-left">Related products</h3>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <!-- Lặp qua từng sản phẩm -->
+      <div class="col" th:each="rv: ${reviews}">
+        <div class="card h-100 shadow-sm">
+          <!-- Badge Sale -->
+          <div class="badge bg-info text-white position-absolute" style="top: 20px; right: 10px;" th:text="${rv.phanloai}"></div>
+          <!-- Hình ảnh sản phẩm -->
+          <img class="card-img-top" th:src="@{'/images/' + ${rv.imageFilename2}}" alt="Product Image" style="height: 300px; object-fit: cover;">
+          <div class="card-body text-center">
+            <!-- Tên sản phẩm -->
+            <a>
+              <h5 class="card-title" th:text="${rv.product_name}"></h5></a>
+            <!-- Mô tả sản phẩm -->
+            <p class="card-text text-muted" style="font-size: 14px;" th:text="${rv.title}"></p>
+            <!-- Giá và nút thêm -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <strong>
+                <span th:text="${'$' + rv.price}"></span>
+              </strong>
+              <button class="btn btn-sm" style="border: 2px solid #efd12f; color: green; background-color: transparent; padding: 5px 10px; font-size: 12px; border-radius: 5px;" onmouseover="this.style.backgroundColor='green'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='green';">
+                <i class="bi bi-cart3"></i> Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- End Product-->
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+    <div class="container py-5">
+      <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+        <div class="row g-4">
+          <div class="col-lg-3">
+            <a href="#">
+              <h1 class="text-primary mb-0">Jewelry</h1>
+              <p class="text-secondary mb-0">Luxurious Jewelry</p>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <div class="position-relative mx-auto">
+              <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
+              <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Follow Page</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-item">
+            <h4 class="text-light mb-3">Why People Like us!</h4>
+            <p class="mb-4">Jewelry is accessories made of gold, silver, gemstones, or pearls, including rings, necklaces,
+              earrings, bracelets, and anklets. They are used for beauty and expressing style.</p>
+            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="d-flex flex-column text-start footer-item">
+            <h4 class="text-light mb-3">Shop Info</h4>
+            <a class="btn-link" href="">About Us</a>
+            <a class="btn-link" href="">Contact Us</a>
+            <a class="btn-link" href="">Privacy Policy</a>
+            <a class="btn-link" href="">Terms & Condition</a>
+            <a class="btn-link" href="">Return Policy</a>
+            <a class="btn-link" href="">FAQs & Help</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="d-flex flex-column text-start footer-item">
+            <h4 class="text-light mb-3">Account</h4>
+            <a class="btn-link" href="">My Account</a>
+            <a class="btn-link" href="">Shop details</a>
+            <a class="btn-link" href="">Shopping Cart</a>
+            <a class="btn-link" href="">Wishlist</a>
+            <a class="btn-link" href="">Order History</a>
+            <a class="btn-link" href="">International Orders</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-item">
+            <h4 class="text-light mb-3">Contact</h4>
+            <p>Address: Phan Dang Luu, Hai Chau, Da Nang</p>
+            <p>Email: jewelry@gmail.com</p>
+            <p>Phone: +84 0763723111</p>
+            <p>Payment Accepted</p>
+            <img src="img/payment.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- Copyright Start -->
+  <div class="container-fluid copyright bg-dark py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+        </div>
+        <div class="col-md-6 my-auto text-center text-md-end text-white">
+          Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright End -->
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script th:src="@{/js/main.js}"></script>
+</html>

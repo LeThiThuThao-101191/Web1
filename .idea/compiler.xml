@@ -2,17 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+<<<<<<< HEAD
+=======
+      <profile default="true" name="Default" enabled="true" />
+>>>>>>> 1b75129 (Du an ck)
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
         <module name="demo6" />
+=======
+        <module name="dajewelry_cuoiky" />
+>>>>>>> 1b75129 (Du an ck)
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+<<<<<<< HEAD
       <module name="demo6" options="-parameters" />
+=======
+      <module name="dajewelry_cuoiky" options="-parameters" />
+>>>>>>> 1b75129 (Du an ck)
     </option>
   </component>
 </project>

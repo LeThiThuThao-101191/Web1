@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm Sản phẩm</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .btn-secondary, .btn-primary {
+            background-color: #ef8891;
+            border-color: #f4faf3;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover, .btn-primary:hover {
+            background-color: #0fa614;
+            border-color: #004085;
+            color: white;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #860f93;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            box-shadow: none;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #fb99a2;
+            box-shadow: 0 0 0 0.25rem rgb(227, 195, 198);
+        }
+
+        .form-control::placeholder {
+            font-style: italic;
+        }
+
+        .btn-lg {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Giới hạn chiều rộng của form */
+        .row {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Padding cho các cột trong form */
+        .col-md-6.mb-3, .col-md-12.mb-3 {
+            padding: 10px;
+        }
+
+
+        .form-control:hover {
+            border-color: #f46674;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center" style="margin-bottom: 30px; color: #0fa614">Add Product</h1>
+    <a th:href="@{/admin/products}" class="btn btn-secondary mb-3">Quay lại danh sách</a>
+
+    <!-- Form Thêm Sản phẩm -->
+    <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Tên Sản phẩm</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Nhập tên sản phẩm" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="price" class="form-label">Giá Sản phẩm</label>
+                <input type="number" id="price" th:field="*{price}" class="form-control" placeholder="Nhập giá sản phẩm" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="price2" class="form-label">Giá Cũ (nếu có)</label>
+                <input type="number" id="price2" th:field="*{price2}" class="form-control" placeholder="Nhập giá cũ" >
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="imageFilename" class="form-label">Đường dẫn hình ảnh:</label>
+                <input type="text" id="imageFilename" th:field="*{imageFilename}" class="form-control" placeholder="Nhập URL hình ảnh" required>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label for="description" class="form-label">Mô tả sản phẩm</label>
+                <textarea id="description" th:field="*{description}" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm" required></textarea>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="phanloai" class="form-label">Loại Sản phẩm</label>
+                <select id="phanloai" th:field="*{phanloai}" class="form-control" required>
+                    <option value="" disabled selected>Chọn loại sản phẩm</option>
+                    <option value="Necklace">Necklace</option>
+                    <option value="Ring">Ring</option>
+                    <option value="Bracelet">Bracelet</option>
+                    <option value="Brooch">Brooch</option>
+                    <option value="Earrings">Earrings</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="precent" class="form-label">Giảm giá (%)</label>
+                <input type="number" id="precent" th:field="*{precent}" class="form-control" placeholder="Nhập tỷ lệ giảm giá" required>
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <button type="submit" class="btn btn-primary btn-lg w-100">Thêm sản phẩm</button>
+            </div>
+        </div>
+    </form>
+    <!-- End Form Thêm Sản phẩm -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

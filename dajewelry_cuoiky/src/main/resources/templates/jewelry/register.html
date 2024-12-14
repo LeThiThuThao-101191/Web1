@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+<section class="h-100 gradient-form" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-taobao-jewelry-fresh-and-simple-gold-jewelry-poster-image_194638.jpg');background-size: cover; background-position: center; margin-top: 40px;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem ;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block" style="border-radius: 1rem 0 0 1rem; background-size: cover;background-image:url('https://png.pngtree.com/background/20210710/original/pngtree-jewelry-poster-background-material-picture-image_1037423.jpg');">
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center"
+                 style="background: linear-gradient(to right, #ffffff, #f6adb3);">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form method="post"
+                      role="form"
+                      th:action="@{/register/save}"
+                      th:object="${user}">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                    <span class="h1 fw-bold mb-0">Registration</span>
+                  </div>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <h6 class="form-label" for="firstname" style="color: #058f6a">First name</h6>
+                    <input class="form-control"
+                           id="firstName"
+                           name="firstName"
+                           placeholder="Enter first name"
+                           th:field="*{firstName}"
+                           type="text" />
+                    <p th:errors = "*{firstName}" class="text-danger"
+                       th:if="${#fields.hasErrors('firstName')}"></p>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <h6 class="form-label" for="lastname" style="color: #058f6a">Last name</h6>
+                    <input  class="form-control"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Enter last name"
+                            th:field="*{lastName}"
+                            type="text" />
+                    <p th:errors = "*{lastName}" class="text-danger"
+                       th:if="${#fields.hasErrors('lastName')}"></p>
+                  </div>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <h6 class="form-label" for="email" style="color: #058f6a">Email</h6>
+                    <input
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            th:field="*{email}"
+                            type="email"
+                    />
+                    <p th:errors = "*{email}" class="text-danger"
+                       th:if="${#fields.hasErrors('email')}"></p>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <h6 class="form-label" for="password" style="color: #058f6a">Password</h6>
+                    <input
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="Enter password"
+                            th:field="*{password}"
+                            type="password"
+                    />
+                    <p th:errors = "*{password}" class="text-danger"
+                       th:if="${#fields.hasErrors('password')}"></p>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit"
+                            style="background-color: #f69da5;height: 40px;width: 120px;border:none; border-radius: 15px; transition: 0.1s;
+                            cursor: pointer;" onmouseover="this.style.backgroundColor='#f46674';
+                            this.style.borderRadius='15px';" onmouseout="this.style.backgroundColor='#f69da5';
+                            this.style.borderRadius='15px';">Register</button>
+
+                    <span style="margin-left: 130px">Already have account?
+                      <a th:href="@{/login}" style="margin-left: 5px">
+                   <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary">Login here</button>
+                    </a></span>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
